@@ -10,6 +10,8 @@
 //INCLUDE
 #include	"GameApp.h"
 #include	"ToolControll.h"
+#include	"AreaManager.h"
+#include	"TabManager.h"
 
 /*************************************************************************//*!
 		@brief			アプリケーションの初期化
@@ -20,7 +22,7 @@
 *//**************************************************************************/
 MofBool CGameApp::Initialize(void) {
 	CUtilities::SetCurrentDirectory("Resource");
-
+	theTabManager.Initialize();
 	return TRUE;
 }
 /*************************************************************************//*!
@@ -34,8 +36,7 @@ MofBool CGameApp::Update(void) {
 	//キーの更新
 	g_pInput->RefreshKey();
 	CTextBox::RefreshImeInput();
-
-	
+	theTabManager.Update();
 	return TRUE;
 }
 /*************************************************************************//*!
@@ -51,6 +52,10 @@ MofBool CGameApp::Render(void) {
 	//画面のクリア
 	g_pGraphics->ClearTarget(0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0);
 
+	theAreaManager.Render();
+
+	theTabManager.Render();
+
 	//描画の終了
 	g_pGraphics->RenderEnd();
 	return TRUE;
@@ -63,6 +68,10 @@ MofBool CGameApp::Render(void) {
 						それ以外	失敗、エラーコードが戻り値となる
 *//**************************************************************************/
 MofBool CGameApp::Release(void) {
+	
 	CTextBox::ReleaseList();
+
+	theTabManager.Release();
+
 	return TRUE;
 }
