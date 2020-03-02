@@ -11,11 +11,20 @@ namespace ToolControll
 	// ********************************************************************************
 	class CButton : public CControll
 	{
-		MofU32  m_BackColorOver;		//!<背景色(マウスオーバー時)
-		MofU32  m_LineColorOver;		//!<枠線の色(マウスオーバー時)
+	public:
+		enum BtnIconAlignment {
+			ICON_LEFT,					//!<左
+			ICON_RIGHT,					//!<右
+		};
+	private:
+		MofU32    m_BackColorOver;		//!<背景色(マウスオーバー時)
+		MofU32    m_LineColorOver;		//!<枠線の色(マウスオーバー時)
 
-		MofU32  m_PushBackColor;		//!<押している間の背景色
-		MofU32  m_PushLineColor;		//!<押している間の枠の色
+		MofU32    m_PushBackColor;		//!<押している間の背景色
+		MofU32	  m_PushLineColor;		//!<押している間の枠の色
+
+		LPTexture m_pTexture;			//!<ボタン内アイコン用画像
+		int		  m_IconAlign;			//!<アイコンの書式
 
 	public:
 		// ********************************************************************************
@@ -45,12 +54,30 @@ namespace ToolControll
 		static std::shared_ptr<CButton> CreateButton(void);
 		// ********************************************************************************
 		/// <summary>
+		/// 画像の読み込み
+		/// </summary>
+		/// <param name="pName">ファイル名</param>
+		/// <returns>成功か失敗</returns>
+		/// <created>いのうえ,2020/03/02</created>
+		/// <changed>いのうえ,2020/03/02</changed>
+		// ********************************************************************************
+		MofBool Load(LPCMofChar pName);
+		// ********************************************************************************
+		/// <summary>
 		/// 描画
 		/// </summary>
 		/// <created>いのうえ,2020/02/24</created>
 		/// <changed>いのうえ,2020/02/29</changed>
 		// ********************************************************************************
 		virtual void Render(void) override;
+		// ********************************************************************************
+		/// <summary>
+		/// 解放
+		/// </summary>
+		/// <created>いのうえ,2020/03/02</created>
+		/// <changed>いのうえ,2020/03/02</changed>
+		// ********************************************************************************
+		void Release(void);
 		// ********************************************************************************
 		/// <summary>
 		/// 押している間の色の設定
@@ -87,6 +114,15 @@ namespace ToolControll
 		/// <changed>いのうえ,2020/02/29</changed>
 		// ********************************************************************************
 		void SetLineColorOver(const MofU32& color);
+		// ********************************************************************************
+		/// <summary>
+		/// アイコンの表示位置設定
+		/// </summary>
+		/// <param name="ali">位置</param>
+		/// <created>いのうえ,2020/03/02</created>
+		/// <changed>いのうえ,2020/03/02</changed>
+		// ********************************************************************************
+		void SetIconAlign(const BtnIconAlignment& ali);
 	};
 
 	//置き換え
