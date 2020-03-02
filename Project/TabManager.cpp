@@ -25,7 +25,7 @@ void CTabManager::Initialize(void)
 		"EDIT",
 		"INFO",
 	};
-	CRectangle rect = theAreaManager.GetRect(AREA_TAB);
+	CRectangle rect = theAreaManager.GetRect(CAreaManager::AREA_TAB);
 	for (int i = 0; i < TAB_COUNT; i++)
 	{
 		CControll::CreateInfo info = {
