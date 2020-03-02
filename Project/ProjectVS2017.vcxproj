@@ -95,6 +95,7 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AreaManager.cpp" />
     <ClCompile Include="ToolControll\Button.cpp" />
     <ClCompile Include="ToolControll\CheckBox.cpp" />
     <ClCompile Include="ToolControll\Controll.cpp" />
@@ -103,10 +104,13 @@
     <ClCompile Include="ToolControll\ListBox.cpp" />
     <ClCompile Include="ToolControll\ScrollBar.cpp" />
     <ClCompile Include="ToolControll\TextBox.cpp" />
+    <ClCompile Include="TabManager.cpp" />
     <ClCompile Include="WindowProc.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AreaManager.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="ToolControll\Button.h" />
     <ClInclude Include="ToolControll\CheckBox.h" />
     <ClInclude Include="ToolControll\Controll.h" />
@@ -116,10 +120,14 @@
     <ClInclude Include="ToolControll\ScrollBar.h" />
     <ClInclude Include="ToolControll\TextBox.h" />
     <ClInclude Include="ToolControll.h" />
+    <ClInclude Include="TabManager.h" />
     <ClInclude Include="WindowProc.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Version.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
