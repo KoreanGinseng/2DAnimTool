@@ -96,6 +96,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AreaManager.cpp" />
+    <ClCompile Include="EditManager.cpp" />
     <ClCompile Include="ToolControll\Button.cpp" />
     <ClCompile Include="ToolControll\CheckBox.cpp" />
     <ClCompile Include="ToolControll\Controll.cpp" />
@@ -110,6 +111,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AreaManager.h" />
+    <ClInclude Include="EditManager.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="ToolControll\Button.h" />
     <ClInclude Include="ToolControll\CheckBox.h" />
