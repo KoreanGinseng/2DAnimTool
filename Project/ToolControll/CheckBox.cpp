@@ -90,10 +90,13 @@ namespace ToolControll
 		{
 			CGraphicsUtilities::RenderRect(rect, color);
 		}
+		CRectangle outRect;
+		m_Font.CalculateStringRect(0, 0, m_Text.GetString(), outRect);
+		float offY = (rect.GetHeight() - outRect.GetHeight()) * 0.5f;
 		//˜g‚Ì‰¡‚É•¶Žš‚ð•`‰æ
 		m_Font.RenderFormatString(
 			box.Right + m_Font.GetSize() * 0.5f,
-			box.Top, m_TextColor, m_Text
+			box.Top + offY, m_TextColor, m_Text.GetString()
 		);
 	}
 	// ********************************************************************************

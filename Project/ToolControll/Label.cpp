@@ -54,15 +54,19 @@ namespace ToolControll
 		{
 			return;
 		}
+		CRectangle rect = GetRect();
 		if (m_bBackShow)
 		{
-			CGraphicsUtilities::RenderFillRect(GetRect(), m_BackColor);
+			CGraphicsUtilities::RenderFillRect(rect, m_BackColor);
 		}
 		if (m_bLineShow)
 		{
-			CGraphicsUtilities::RenderRect(GetRect(), m_LineColor);
+			CGraphicsUtilities::RenderRect(rect, m_LineColor);
 		}
-		m_Font.RenderFormatString(GetRect(), m_TextColor, m_Text);
+		CRectangle outRect;
+		m_Font.CalculateStringRect(0, 0, m_Text.GetString(), outRect);
+		float offY = (rect.GetHeight() - outRect.GetHeight()) * 0.5f;
+		m_Font.RenderFormatString(rect.Left, rect.Top + offY, m_TextColor, m_Text);
 	}
 	// ********************************************************************************
 	/// <summary>

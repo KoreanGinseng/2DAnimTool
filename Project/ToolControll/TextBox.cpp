@@ -16,7 +16,10 @@ namespace ToolControll
 		m_CursorTime(0),
 		m_CursorPoint(0),
 		m_bNumOnly(FALSE),
-		m_Error(0)
+		m_Error(0),
+		m_TxtAlign(TXTALI_LEFT),
+		m_NumMin(INT16_MIN),
+		m_NumMax(INT16_MAX)
 	{
 		m_BackColor = MOF_COLOR_WHITE;
 		GetList().Add(this);
@@ -180,6 +183,14 @@ namespace ToolControll
 			CRectangle outRect;
 			m_Font.CalculateStringRect(0, 0, str.GetString(), outRect);
 			m_CursorPos = outRect.Right;
+			if (m_TxtAlign == TXTALI_RIGHT)
+			{
+				m_CursorPos = GetRect().GetWidth() - 4;
+			}
+			else if (m_TxtAlign == TXTALI_CENTER)
+			{
+				m_CursorPos += (GetRect().GetWidth() - outRect.GetWidth()) * 0.5f;
+			}
 		}
 	}
 	// ********************************************************************************
@@ -234,8 +245,20 @@ namespace ToolControll
 				break;
 			}
 		}
+		CRectangle outRect;
+		m_Font.CalculateStringRect(0, 0, str.GetString(), outRect);
+		float offsetX = 0;
+		float offsetY = (rect.GetHeight() - outRect.GetHeight()) * 0.5f;
+		if (m_TxtAlign == TXTALI_RIGHT)
+		{
+			offsetX = rect.GetWidth() - outRect.GetWidth();
+		}
+		else if (m_TxtAlign == TXTALI_CENTER)
+		{
+			offsetX = (rect.GetWidth() - outRect.GetWidth()) * 0.5f;
+		}
 		//文字の描画
-		m_Font.RenderString(rect, m_TextColor, str.GetString());
+		m_Font.RenderString(rect.Left + offsetX, rect.Top + offsetY, m_TextColor, str.GetString());
 	}
 	// ********************************************************************************
 	/// <summary>
@@ -335,6 +358,17 @@ namespace ToolControll
 				g_pImeInput->SetInputString("0");
 			}
 		}
+		else
+		{
+			if (GetNum() < m_NumMin)
+			{
+				SetNum(m_NumMin);
+			}
+			else if (GetNum() > m_NumMax)
+			{
+				SetNum(m_NumMax);
+			}
+		}
 	}
 	// ********************************************************************************
 	/// <summary>
@@ -370,7 +404,7 @@ namespace ToolControll
 		{
 			return;
 		}
-		m_Text = std::_Floating_to_string("%.1f", num).c_str();
+		m_Text = std::_Floating_to_string("%.0f", num).c_str();
 	}
 	// ********************************************************************************
 	/// <summary>
@@ -395,5 +429,31 @@ namespace ToolControll
 	void CTextBox::SubNum(const MofFloat & num)
 	{
 		AddNum(-num);
+	}
+	// ********************************************************************************
+	/// <summary>
+	/// 描画位置の設定
+	/// </summary>
+	/// <param name="align">描画位置</param>
+	/// <created>いのうえ,2020/03/03</created>
+	/// <changed>いのうえ,2020/03/03</changed>
+	// ********************************************************************************
+	void CTextBox::SetTxtAlign(const TxtAlign & align)
+	{
+		m_TxtAlign = align;
+	}
+	// ********************************************************************************
+	/// <summary>
+	/// 最小値と最大値の設定
+	/// </summary>
+	/// <param name="min">最小値</param>
+	/// <param name="max">最大値</param>
+	/// <created>いのうえ,2020/03/03</created>
+	/// <changed>いのうえ,2020/03/03</changed>
+	// ********************************************************************************
+	void CTextBox::SetNumMinMax(const MofInt & min, const MofInt & max)
+	{
+		m_NumMin = min;
+		m_NumMax = max;
 	}
 }

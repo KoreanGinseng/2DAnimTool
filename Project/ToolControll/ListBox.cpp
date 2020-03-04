@@ -383,15 +383,10 @@ namespace ToolControll
 		{
 			return;
 		}
-		if (no < m_Select)
+		if (no <= m_Select)
 		{
 			m_Select--;
 			m_PrevSelect--;
-		}
-		else if (m_Select == no)
-		{
-			m_Select = -1;
-			m_PrevSelect = -1;
 		}
 		else if (m_Select >= m_List.GetArrayCount())
 		{

@@ -16,6 +16,12 @@ namespace ToolControll
 			NE_NOCONVERSION = 0b00000001,	//!<エラー番号１：変換失敗
 			NE_OUTOFRANGE   = 0b00000010,	//!<エラー番号２：オーバーフロー
 		};
+		/// <summary>文字描画位置</summary>
+		enum TxtAlign {
+			TXTALI_LEFT,					//!<左寄せ
+			TXTALI_CENTER,					//!<中央寄せ
+			TXTALI_RIGHT,					//!<右寄せ
+		};
 	private:
 		MofBool  m_bInput;					//!<入力中フラグ
 		MofFloat m_CursorPos;				//!<カーソルの座標
@@ -23,6 +29,9 @@ namespace ToolControll
 		MofInt   m_CursorTime;				//!<点滅用カウンタ
 		MofBool  m_bNumOnly;				//!<数字のみの入力を受け付けるフラグ
 		UCHAR    m_Error;					//!<エラー
+		MofInt   m_TxtAlign;				//!<文字描画位置
+		MofInt	 m_NumMax;					//!<最大値
+		MofInt	 m_NumMin;					//!<最小値
 	public:
 		// ********************************************************************************
 		/// <summary>
@@ -185,6 +194,25 @@ namespace ToolControll
 		/// <changed>いのうえ,2020/03/01</changed>
 		// ********************************************************************************
 		void SubNum(const MofFloat& num);
+		// ********************************************************************************
+		/// <summary>
+		/// 描画位置の設定
+		/// </summary>
+		/// <param name="align">描画位置</param>
+		/// <created>いのうえ,2020/03/03</created>
+		/// <changed>いのうえ,2020/03/03</changed>
+		// ********************************************************************************
+		void SetTxtAlign(const TxtAlign& align);
+		// ********************************************************************************
+		/// <summary>
+		/// 最小値と最大値の設定
+		/// </summary>
+		/// <param name="min">最小値</param>
+		/// <param name="max">最大値</param>
+		/// <created>いのうえ,2020/03/03</created>
+		/// <changed>いのうえ,2020/03/03</changed>
+		// ********************************************************************************
+		void SetNumMinMax(const MofInt& min, const MofInt& max);
 	};
 
 	//置き換え
