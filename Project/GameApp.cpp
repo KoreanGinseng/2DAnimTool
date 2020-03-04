@@ -12,6 +12,7 @@
 #include	"ToolControll.h"
 #include	"AreaManager.h"
 #include	"TabManager.h"
+#include	"EditManager.h"
 
 /*************************************************************************//*!
 		@brief			アプリケーションの初期化
@@ -23,6 +24,7 @@
 MofBool CGameApp::Initialize(void) {
 	CUtilities::SetCurrentDirectory("Resource");
 	theTabManager.Initialize();
+	theEditManager.Initailize();
 	return TRUE;
 }
 /*************************************************************************//*!
@@ -37,6 +39,7 @@ MofBool CGameApp::Update(void) {
 	g_pInput->RefreshKey();
 	CTextBox::RefreshImeInput();
 	theTabManager.Update();
+	theEditManager.Update();
 	return TRUE;
 }
 /*************************************************************************//*!
@@ -56,6 +59,8 @@ MofBool CGameApp::Render(void) {
 
 	theTabManager.Render();
 
+	theEditManager.Render();
+
 	//描画の終了
 	g_pGraphics->RenderEnd();
 	return TRUE;
@@ -70,7 +75,7 @@ MofBool CGameApp::Render(void) {
 MofBool CGameApp::Release(void) {
 	
 	CTextBox::ReleaseList();
-
+	theEditManager.Release();
 	theTabManager.Release();
 
 	return TRUE;
