@@ -95,6 +95,7 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AnimationData.cpp" />
     <ClCompile Include="AreaManager.cpp" />
     <ClCompile Include="EditManager.cpp" />
     <ClCompile Include="ToolControll\Button.cpp" />
@@ -110,6 +111,7 @@
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AnimationData.h" />
     <ClInclude Include="AreaManager.h" />
     <ClInclude Include="EditManager.h" />
     <ClInclude Include="resource.h" />
